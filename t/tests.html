@@ -1,0 +1,109 @@
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <title>Template.Tiny.js tests</title>
+   <script type="text/javascript" src="http://xregexp.com/xregexp-min.js"></script>
+   <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+   <script type="text/javascript" src="../lib/Template.Tiny.js"></script>
+   <script type="text/javascript" src="data.js"></script>
+   <link rel="stylesheet" type="text/css" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" />
+
+   <script>
+      var tmp = new Template.Tiny();
+      $(document).ready(function(){
+
+         module("01_compile");
+         test('Template.Tiny compiles', function() {
+            ok(
+               Template.Tiny,
+               'Template.Tiny compiles'
+            );
+         });
+
+         module("02_trivial");
+         test('Template processed ok', function() {
+            ok(
+               tmp.process("Hello [% foo %]!", {
+                  foo: 'World'
+               }) === "Hello World!",
+               'Template processed ok'
+            );
+         });
+
+         module("03_samples");
+         test('Sample 01', function() {
+            ok(
+               tmp.process(samples.tt['01_hello'], samples.expect['01_hello'])
+                  === samples.txt['01_hello'], '01_hello'
+            );
+         });
+
+         test('Sample 02', function() {
+            ok(
+               tmp.process(samples.tt['02_null'], samples.expect['02_null'])
+                  === samples.txt['02_null'], '02_null'
+            );
+         });
+
+         test('Sample 03', function() {
+            ok(
+               tmp.process(samples.tt['03_chomp'], samples.expect['03_chomp'])
+                  === samples.txt['03_chomp'], '03_chomp'
+            );
+         });
+
+         test('Sample 04', function() {
+            ok(
+               tmp.process(samples.tt['04_nested'], samples.expect['04_nested'])
+                  === samples.txt['04_nested'], '04_nested'
+            );
+         });
+
+         test('Sample 05', function() {
+            ok(
+               tmp.process(samples.tt['05_condition'], samples.expect['05_condition'])
+                  === samples.txt['05_condition'], '05_condition'
+            );
+         });
+
+         // This test doesn't make sense in JS since all hashes are actually objects
+         //test('Sample 06', function() {
+            //ok(
+               //tmp.process(samples.tt['03_chomp'], samples.expect['03_chomp'])
+                  //=== samples.txt['03_chomp'], '03_chomp'
+            //);
+         //});
+
+         test('Sample 07', function() {
+            ok(
+               tmp.process(samples.tt['07_nesting'], samples.expect['07_nesting'])
+                  === samples.txt['07_nesting'], '07_nesting'
+            );
+         });
+
+         test('Sample 08', function() {
+            ok(
+               tmp.process(samples.tt['08_foreach'], samples.expect['08_foreach'])
+                  === samples.txt['08_foreach'], '08_foreach'
+            );
+         });
+
+         test('Sample 09', function() {
+            ok(
+               tmp.process(samples.tt['09_trim'], samples.expect['09_trim'])
+                  === samples.txt['09_trim'], '09_trim'
+            );
+         });
+
+      });
+   </script>
+
+</head>
+<body>
+  <h1 id="qunit-header">Template.Tiny</h1>
+ <h2 id="qunit-banner"></h2>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+</body>
+</html>
